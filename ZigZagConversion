@@ -1,0 +1,56 @@
+class Solution {
+    public String convert(String s, int numRows) {
+        String[] str = new String[numRows];
+        if(s.length()<numRows || numRows==1)
+        {
+            return s;
+        }
+    
+        
+        char[] input = s.toCharArray();
+        int no = 1;
+        int increment = 1;
+        for(int i=0;i<s.length();i++)
+        {
+            if(str[no-1] == null)
+            {
+                 str[no-1] = Character.toString(input[i]);
+            }
+            else{
+            str[no-1] = str[no-1] + input[i];}
+            
+        
+            if(no == numRows)
+            {
+                no --;
+                increment = 0;
+            }
+            else if(no == 1)
+            {
+                no ++;
+                increment = 1;
+            }
+            else if(increment == 1 )
+            {
+                no++;
+            }
+            else
+            {
+                no--;
+            }
+        }
+        
+        String output="";
+        for(int j = 0; j<numRows; j++)
+        {
+            if (output == null)
+            {
+               output = str[j]; 
+            }
+            else{
+            output = output + str[j];}
+        }
+        return output;
+        
+    }
+}
