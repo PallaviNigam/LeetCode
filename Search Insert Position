@@ -1,0 +1,68 @@
+class Solution {
+//https://leetcode.com/problems/search-insert-position/submissions/
+    public int searchInsert(int[] nums, int target) {
+        
+     
+        
+      return(  find_index(0, nums.length-1,nums,target));
+
+        
+    }
+    
+    public int find_index(int start, int end, int[] nums,int target)
+    {
+        
+        if(start == end )
+        {
+             if (nums[start] == target)
+            {
+                return start;
+            }
+            else if(nums[start] > target)
+            {
+                return start;
+            }
+            else
+            {
+                return start + 1;
+            }
+            
+        }
+        int mid = ((start + end)/2 ) ;
+        if (nums[mid] == target)
+        {
+            return mid;
+        }
+        
+        else if(nums[mid] < target)
+        {
+            
+            if(mid + 1> nums.length)
+            {
+             return(find_index(mid,mid,nums,target));
+            }
+           else if( nums[mid+1]> target)
+            {
+                return mid + 1;
+            }
+           return( find_index(mid+1, end, nums ,target));
+        }
+        else
+        {
+            
+            if(mid-1<0)
+            {
+               return(find_index(mid,mid,nums,target));
+            }
+            
+            else if(  nums[mid-1] < target)
+            {
+                return mid;
+            }
+                    return(  find_index(start , mid -1 , nums ,target));
+        }
+        
+    
+    }
+
+}
