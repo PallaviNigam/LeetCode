@@ -1,0 +1,46 @@
+class Solution {
+    public boolean isPalindrome(int x) {
+        
+        //https://leetcode.com/problems/palindrome-number/submissions/
+        char[] input = ("" + x).toCharArray();
+        if (input.length == 1)
+        {
+            return true;
+        }
+        
+        int    mid = (input.length )/2;
+        int start ;
+        int end;
+        if(input.length % 2 != 0)
+        {
+       
+            start = mid -1;
+            end = mid + 1;
+            
+        }
+        
+        else
+        {
+            start = mid -1;
+            end = mid;
+        }
+        
+        while(start >= 0)
+        {
+            if(input[start] == input[end])
+            {
+                start --;
+                end++;
+            }
+            else
+            {
+                return false;
+            }
+     
+        }
+        
+        
+        return true;
+    }
+    
+}
