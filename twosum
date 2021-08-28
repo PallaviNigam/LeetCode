@@ -1,0 +1,89 @@
+class ele
+{
+    int number;
+    List<Integer> ll ;
+}
+
+class Solution {
+   //https://leetcode.com/problems/two-sum/submissions/
+   
+    //sent index of the two element which forms required sum, elements could be repeating
+    //create hasmap of all the elments as key and object having totalno of time that element occured along with indexs
+    //iterate over the elements find 
+    //target-currelement and check if it is present in Hashmap, if it is present 
+    // 1)is same as current element then find index other than current 
+    //index(case where target is 6 and list contains 3 and 3),
+    // 2) if it is not same then just pick any of the index and return 
+    public int[] twoSum(int[] nums, int target)  {
+        HashMap<Integer,ele> hm = new HashMap<>();
+        
+        
+        int[] twoSum;
+        for(int i = 0;i < nums.length;i++)
+        {
+            if (hm.containsKey(nums[i]))
+                
+            {
+             ele obj1 =    hm.get(nums[i]);
+               obj1.number++;
+              obj1.ll.add(i);
+                hm.put(nums[i], obj1);
+            }
+            else{
+                ele obj = new ele();
+                obj.number = 1;
+                obj.ll = new ArrayList<>();
+                obj.ll.add(i);
+                hm.put(nums[i] , obj);
+            }
+            
+        }
+        
+        int req;
+        twoSum = new int[2];
+              
+        for(int j = 0;j<nums.length;j++)
+        {
+            req = target - nums[j];
+            
+            if(req == nums[j])
+            {
+                if(hm.containsKey(req) && hm.get(req).number>1)
+                {
+                    int not_found = -1;
+                    List<Integer> list =  hm.get(req).ll;
+                    for(int k =0;k< list.size();k++)
+                    {
+                        if(list.get(k) != j)
+                        {
+                              twoSum[1] =list.get(k) ;
+                            break;
+                        }
+                    }
+           
+//                    list.forEach(e->{
+//                        if (e != j)
+//                        {
+//                            twoSum[1] = e;
+//                          //  throw new Exception();
+                           
+//                        }
+//                    });
+                    twoSum[0] = j;
+                    return twoSum;
+                
+                
+            }}
+            else if(hm.containsKey(req))
+            {
+                   twoSum[0] = j;
+              twoSum[1] = hm.get(req).ll.get(0);  
+                  return twoSum;
+                
+            }
+            
+        }
+        
+        return twoSum;
+    }
+}
